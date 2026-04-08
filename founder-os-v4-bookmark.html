@@ -25,28 +25,6 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--text);font-size:
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-
-<!-- BEGIN: Supabase Integration -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    // CHANGE THESE!
-    const SUPABASE_URL = 'https://tlwaprmivtwgppodwukw.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_z5k9HtYnVap-3gziRrx6TA_prCRCD3G';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    async function fetchBookmarks() {
-      const { data, error } = await supabase.from('bookmarks').select('*');
-      const resultsElem = document.getElementById('sb-results');
-      if (error) {
-        resultsElem.textContent = 'Error: ' + error.message;
-      } else {
-        resultsElem.textContent = JSON.stringify(data, null, 2);
-      }
-    }
-  </script>
-  <button onclick="fetchBookmarks()">Fetch Bookmarks from Supabase</button>
-  <pre id="sb-results" style="background:#f4f4f4;padding:10px;"></pre>
-  <!-- END: Supabase Integration -->
   
 /* ── LAYOUT ── */
 .app{display:flex;height:100vh;overflow:hidden}
@@ -4374,5 +4352,28 @@ function buildUploadPanel(docKey, doc) {
   };
 })();
 </script>
+
+<!-- BEGIN: Supabase Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    // CHANGE THESE!
+    const SUPABASE_URL = 'https://tlwaprmivtwgppodwukw.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_z5k9HtYnVap-3gziRrx6TA_prCRCD3G';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function fetchBookmarks() {
+      const { data, error } = await supabase.from('bookmarks').select('*');
+      const resultsElem = document.getElementById('sb-results');
+      if (error) {
+        resultsElem.textContent = 'Error: ' + error.message;
+      } else {
+        resultsElem.textContent = JSON.stringify(data, null, 2);
+      }
+    }
+  </script>
+  <button onclick="fetchBookmarks()">Fetch Bookmarks from Supabase</button>
+  <pre id="sb-results" style="background:#f4f4f4;padding:10px;"></pre>
+  <!-- END: Supabase Integration -->
+  
 </body>
 </html>
